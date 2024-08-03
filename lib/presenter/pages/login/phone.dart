@@ -1,4 +1,4 @@
-import 'package:beda_invest/src/login/verify.dart';
+import 'package:beda_invest/presenter/pages/login/verify.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,14 +43,19 @@ class _MyPhoneState extends State<MyPhone> {
     // Checking if the country code and phone number meet the length requirements
     if (countryCode.length < 2 || countryCode.length > 4) {
       // Alert the user that the country code length is invalid
-      _showAlert(context, appLocalizations?.invalidCountryCode ?? 'Invalid country code',
-          appLocalizations?.countryCodeMustBe ?? 'Country code must be between 1 to 3 digits.');
+      _showAlert(
+          context,
+          appLocalizations?.invalidCountryCode ?? 'Invalid country code',
+          appLocalizations?.countryCodeMustBe ??
+              'Country code must be between 1 to 3 digits.');
       return;
     }
 
     if (phone.length < 8 || phone.length > 10) {
       // Alert the user that the phone number length is invalid
-      _showAlert(context, appLocalizations?.invalidPhoneNumber ?? 'Invalid phone number',
+      _showAlert(
+          context,
+          appLocalizations?.invalidPhoneNumber ?? 'Invalid phone number',
           appLocalizations?.phoneNumberMustBe ??
               'Phone number must be between 8 to 10 digits after the country code.');
       return;
@@ -75,7 +80,13 @@ class _MyPhoneState extends State<MyPhone> {
           _codeSending = false; // Reset loading state on failure
         });
         if (e.code == 'too-many-requests') {
-          _showAlert(context, AppLocalizations.of(context)?.tooManyRequests ?? 'Too many requests', AppLocalizations.of(context)?.weBlockedYouBecauseOfTooManyRequests ?? 'We blocked you because of too many requests. Please try again later.');
+          _showAlert(
+              context,
+              AppLocalizations.of(context)?.tooManyRequests ??
+                  'Too many requests',
+              AppLocalizations.of(context)
+                      ?.weBlockedYouBecauseOfTooManyRequests ??
+                  'We blocked you because of too many requests. Please try again later.');
         }
       },
       codeSent: (String verificationId, int? resendToken) {
@@ -120,7 +131,6 @@ class _MyPhoneState extends State<MyPhone> {
       },
     );
   }
-
 
   void _launchURL() async {
     final Uri termsUri = Uri.parse('https://www.beda.uz/terms-of-service');

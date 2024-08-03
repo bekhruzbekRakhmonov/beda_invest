@@ -1,5 +1,5 @@
-import 'package:beda_invest/src/home/home.dart';
-import 'package:beda_invest/src/settings/settings_controller.dart';
+import 'package:beda_invest/domain/controllers/settings_controller.dart';
+import 'package:beda_invest/presenter/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:beda_invest/src/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,7 +35,7 @@ class SwitchLanguages extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               child: TextButton(
                 style: TextButton.styleFrom(), // Change the button text color
-                child: Text(
+                child: const Text(
                   "🇺🇸 English",
                   style: TextStyle(fontSize: 18.0),
                 ),
@@ -53,7 +53,7 @@ class SwitchLanguages extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               child: TextButton(
                 style: TextButton.styleFrom(), // Change the button text color
-                child: Text(
+                child: const Text(
                   "🇷🇺 Русский",
                   style: TextStyle(fontSize: 18.0),
                 ),
@@ -71,7 +71,7 @@ class SwitchLanguages extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               child: TextButton(
                 style: TextButton.styleFrom(), // Change the button text color
-                child: Text(
+                child: const Text(
                   "🇺🇿 O'zbekcha",
                   style: TextStyle(fontSize: 18.0),
                 ),

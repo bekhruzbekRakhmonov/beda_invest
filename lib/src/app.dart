@@ -1,6 +1,7 @@
+import 'package:beda_invest/presenter/pages/home/home_page.dart';
 import 'package:beda_invest/src/model_theme.dart';
 
-import 'package:beda_invest/src/splash/splash.dart';
+import 'package:beda_invest/presenter/pages/splash/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,9 +9,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'settings/settings_controller.dart';
-import 'settings/settings_view.dart';
-import 'package:beda_invest/src/home/home.dart';
+import '../domain/controllers/settings_controller.dart';
+import '../presenter/pages/settings/settings_view.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void setLocale(Locale value)  async {
+  void setLocale(Locale value) async {
     setState(() {
       _locale = value;
     });
@@ -54,62 +54,62 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ModelTheme(),
-      child: Consumer<ModelTheme>(
-          builder: (context, ModelTheme themeNotifier, child) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        locale: _locale,
-        home: SplashPage(settingsController: widget.settingsController),
-        restorationScopeId: 'app',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''),
-          Locale('uz', 'UZ'),
-          Locale('ru', 'RU'),
-        ],
-        onGenerateTitle: (BuildContext context) =>
-            AppLocalizations.of(context)!.appTitle,
-        theme: themeNotifier.isDark
-              ? ThemeData(
-                  brightness: Brightness.dark,
-                  textTheme: const TextTheme(
+        create: (_) => ModelTheme(),
+        child: Consumer<ModelTheme>(
+            builder: (context, ModelTheme themeNotifier, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            locale: _locale,
+            home: SplashPage(settingsController: widget.settingsController),
+            restorationScopeId: 'app',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', ''),
+              Locale('uz', 'UZ'),
+              Locale('ru', 'RU'),
+            ],
+            onGenerateTitle: (BuildContext context) =>
+                AppLocalizations.of(context)!.appTitle,
+            theme: themeNotifier.isDark
+                ? ThemeData(
+                    brightness: Brightness.dark,
+                    textTheme: const TextTheme(
+                      bodyMedium:
+                          TextStyle(fontSize: 16.0, color: Colors.white),
+                    ))
+                : ThemeData(
+                    brightness: Brightness.light,
+                    primaryColor: CupertinoColors.white,
+                    primarySwatch: Colors.blue,
+                    // iconTheme: IconThemeData(color: Colors.white)
+                    textTheme: const TextTheme(
                       bodyMedium: TextStyle(
-                        fontSize: 16.0,
-                          color: Colors.white),)
-                )
-              : ThemeData(
-                  brightness: Brightness.light,
-                  primaryColor: CupertinoColors.white,
-                  primarySwatch: Colors.blue,
-                  // iconTheme: IconThemeData(color: Colors.white)
-                  textTheme: const TextTheme(
-                      bodyMedium: TextStyle(
-                        fontSize: 16.0,
+                          fontSize: 16.0,
                           color: Colors.black), // Text color for light mode
                     ),
-                ),
-        darkTheme: ThemeData.dark(),
-        themeMode: widget.settingsController.themeMode,
-        onGenerateRoute: (RouteSettings routeSettings) {
-          return MaterialPageRoute<void>(
-            settings: routeSettings,
-            builder: (BuildContext context) {
-              switch (routeSettings.name) {
-                case SettingsView.routeName:
-                  return SettingsView(controller: widget.settingsController);
-                default:
-                  return HomePage();
-              }
+                  ),
+            darkTheme: ThemeData.dark(),
+            themeMode: widget.settingsController.themeMode,
+            onGenerateRoute: (RouteSettings routeSettings) {
+              return MaterialPageRoute<void>(
+                settings: routeSettings,
+                builder: (BuildContext context) {
+                  switch (routeSettings.name) {
+                    case SettingsView.routeName:
+                      return SettingsView(
+                          controller: widget.settingsController);
+                    default:
+                      return HomePage();
+                  }
+                },
+              );
             },
           );
-        },
-      );
-          }));
+        }));
   }
 }

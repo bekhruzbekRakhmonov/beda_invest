@@ -1,5 +1,5 @@
-import 'package:beda_invest/src/property/api_service.dart';
-import 'package:beda_invest/src/property/property_type.dart';
+import 'package:beda_invest/data/api_calls/api_service.dart';
+import 'package:beda_invest/domain/models/property_type.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

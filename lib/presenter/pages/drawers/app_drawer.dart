@@ -1,11 +1,10 @@
 import 'package:beda_invest/src/app.dart';
-import 'package:beda_invest/src/drawers/switch_languages.dart';
-import 'package:beda_invest/src/home/home.dart';
-import 'package:beda_invest/src/settings/settings_controller.dart';
-import 'package:beda_invest/src/settings/settings_service.dart';
+import 'package:beda_invest/presenter/pages/drawers/switch_languages.dart';
+import 'package:beda_invest/domain/controllers/settings_controller.dart';
+import 'package:beda_invest/data/services/settings_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:beda_invest/src/login/phone.dart'; // Import your phone.dart file
+import 'package:beda_invest/presenter/pages/login/phone.dart'; // Import your phone.dart file
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import your generated localizations
 
 class AppDrawer extends StatelessWidget {
@@ -17,7 +16,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
     // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
+    // Flutter Widgets.
     final settingsController = SettingsController(SettingsService());
 
     // Load the user's preferred theme while the splash screen is displayed.
@@ -34,7 +33,7 @@ class AppDrawer extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                   ),
-                  child: Flex(
+                  child: const Flex(
                     direction: Axis.horizontal,
                     children: [
                       Expanded(
@@ -55,7 +54,8 @@ class AppDrawer extends StatelessWidget {
                                     fontSize: 24.0,
                                     fontWeight: FontWeight.w700),
                               )
-                            ],),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -70,7 +70,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                     title: Text(
                       AppLocalizations.of(context)!.profile,
-                      style: TextStyle(fontSize: 20.0),
+                      style: const TextStyle(fontSize: 20.0),
                     ),
                     onTap: () {
                       // Navigator.push(
@@ -88,7 +88,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                     title: Text(
                       AppLocalizations.of(context)!.myProperties,
-                      style: TextStyle(fontSize: 20.0),
+                      style: const TextStyle(fontSize: 20.0),
                     ),
                     onTap: () {
                       // Implement the logic to navigate to the bookmarks page.
@@ -108,7 +108,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                     title: Text(
                       AppLocalizations.of(context)!.bookmarks,
-                      style: TextStyle(fontSize: 20.0),
+                      style: const TextStyle(fontSize: 20.0),
                     ),
                     onTap: () {
                       // Implement the logic to navigate to the bookmarks page.
@@ -150,54 +150,62 @@ class AppDrawer extends StatelessWidget {
                     // Example: ChangeLocale.of(context).change('uz');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SwitchLanguages(settingsController: settingsController,)),
+                      MaterialPageRoute(
+                          builder: (context) => SwitchLanguages(
+                                settingsController: settingsController,
+                              )),
                     ); // Close the drawer after navigation.
                   },
                 ),
-                !isLoggedIn ?  ListTile(
-                    leading: Icon(
-                      Icons.login,
-                      size: 30.0,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context)!.login,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    onTap: () async {
-                      // Implement the logic to navigate to the login page.
-                      Future.delayed(Duration.zero, () {
-                        Navigator.push(
+                !isLoggedIn
+                    ? ListTile(
+                        leading: Icon(
+                          Icons.login,
+                          size: 30.0,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
+                        title: Text(
+                          AppLocalizations.of(context)!.login,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        onTap: () async {
+                          // Implement the logic to navigate to the login page.
+                          Future.delayed(Duration.zero, () {
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const MyPhone(),
                               ),
                             );
-                      }); // Close the drawer after navigation.
-                    },
-                  ) : ListTile(
-                    leading: Icon(
-                      Icons.logout,
-                      size: 30.0,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context)!.logout,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    onTap: () {
-                      FirebaseAuth.instance.signOut();
-                      // Implement the logic to navigate to the login page.
-                      Future.delayed(Duration.zero, () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => MyApp(settingsController: settingsController,)),
-                          );
-                      });
-                    },
-                  ),
-                  
-                SizedBox(
+                          }); // Close the drawer after navigation.
+                        },
+                      )
+                    : ListTile(
+                        leading: Icon(
+                          Icons.logout,
+                          size: 30.0,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
+                        title: Text(
+                          AppLocalizations.of(context)!.logout,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        onTap: () {
+                          FirebaseAuth.instance.signOut();
+                          // Implement the logic to navigate to the login page.
+                          Future.delayed(Duration.zero, () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyApp(
+                                        settingsController: settingsController,
+                                      )),
+                            );
+                          });
+                        },
+                      ),
+
+                const SizedBox(
                   height: 65.0,
                 )
               ],
@@ -247,7 +255,9 @@ class AppDrawer extends StatelessWidget {
           //   ],
           // ),
 
-          SizedBox(height: 40.0,)
+          SizedBox(
+            height: 40.0,
+          )
         ],
       ),
     );
