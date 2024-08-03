@@ -3,7 +3,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -50,22 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static FirebaseOptions android = FirebaseOptions(
-    apiKey: dotenv.env['API_KEY_ANDROID']!,
-    appId: dotenv.env['APP_ID_ANDROID']!,
-    messagingSenderId: dotenv.env['MESSAGING_SENDER_ID_WEB']!,
-    projectId: dotenv.env['PROJECT_ID']!,
-    storageBucket: dotenv.env['STORAGE_BUCKET']!,
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDa0pG-au9ZsIvRe9_pjGocASkwcUBJrJM',
+    appId: '1:412187320992:android:c0614d91265eef51011fc5',
+    messagingSenderId: '412187320992',
+    projectId: 'beda-invest',
+    storageBucket: 'beda-invest.appspot.com',
   );
 
-  static FirebaseOptions ios = FirebaseOptions(
-    apiKey: dotenv.env['API_KEY_IOS']!,
-    appId: dotenv.env['APP_ID_IOS']!,
-    messagingSenderId: dotenv.env['MESSAGING_SENDER_ID_WEB']!,
-    projectId: dotenv.env['PROJECT_ID']!,
-    storageBucket: dotenv.env['STORAGE_BUCKET']!,
-    // androidClientId: dotenv.env['ANDROID_CLIENT_ID']!,
-    // iosClientId: dotenv.env['IOS_CLIENT_ID']!,
-    iosBundleId: dotenv.env['IOS_BUNDLE_ID']!,
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAqNOSBJPRUkGRBCGE_w3NRHhrsIXobn4Q',
+    appId: '1:412187320992:ios:60b4cb7214664cd7011fc5',
+    messagingSenderId: '412187320992',
+    projectId: 'beda-invest',
+    storageBucket: 'beda-invest.appspot.com',
+    iosBundleId: 'com.example.bedaInvest',
   );
 }
