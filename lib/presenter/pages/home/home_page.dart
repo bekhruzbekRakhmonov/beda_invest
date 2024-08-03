@@ -1,6 +1,6 @@
-import 'package:beda_invest/src/drawers/app_drawer.dart';
-import 'package:beda_invest/src/property/property_detail.dart';
-import 'package:beda_invest/src/property/property_type.dart';
+import 'package:beda_invest/presenter/pages/drawers/app_drawer.dart';
+import 'package:beda_invest/presenter/pages/details/property_detail.dart';
+import 'package:beda_invest/domain/models/property_type.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:money_formatter/money_formatter.dart';
@@ -15,7 +15,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('beda. invest', style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w900),),
+        title: const Text(
+          'beda. invest',
+          style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w900),
+        ),
       ),
       drawer: AppDrawer(isLoggedIn: true),
       body: Column(
@@ -189,9 +192,11 @@ class PropertyCard extends StatelessWidget {
 final List<Property> properties = [
   Property(
     id: '1',
-    imageUrl: 'https://frankfurt.apollo.olxcdn.com/v1/files/n8rqrpr6lr0g3-UZ/image;s=1000x700',
+    imageUrl:
+        'https://frankfurt.apollo.olxcdn.com/v1/files/n8rqrpr6lr0g3-UZ/image;s=1000x700',
     title: 'Dala hovli Yunusobod tumanida',
-    description: 'A beautiful house located in the heart of Yunusobod district.',
+    description:
+        'A beautiful house located in the heart of Yunusobod district.',
     price: 1000000,
     shares: 10000,
     investorsCount: 40,
@@ -199,7 +204,8 @@ final List<Property> properties = [
   ),
   Property(
     id: '2',
-    imageUrl: 'https://frankfurt.apollo.olxcdn.com/v1/files/t5b1y93v5ew1-UZ/image;s=1000x700',
+    imageUrl:
+        'https://frankfurt.apollo.olxcdn.com/v1/files/t5b1y93v5ew1-UZ/image;s=1000x700',
     title: 'Dala hovli Chorvokda',
     description: 'A modern apartment located in Charvak.',
     price: 2000000,
@@ -209,4 +215,3 @@ final List<Property> properties = [
   ),
   // Add more properties here
 ];
-

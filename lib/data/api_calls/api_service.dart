@@ -1,7 +1,7 @@
 // api_service.dart
 
 import 'dart:convert';
-import 'package:beda_invest/src/property/property_type.dart';
+import 'package:beda_invest/domain/models/property_type.dart';
 import 'package:http/http.dart' as http;
 
 Future<Property> fetchProperty(String propertyId) async {

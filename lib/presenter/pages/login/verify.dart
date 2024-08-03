@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:beda_invest/src/login/user_service.dart';
+import 'package:beda_invest/data/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pinput/pinput.dart';
@@ -13,7 +13,8 @@ class MyVerify extends StatefulWidget {
   late User user;
   final UserService userService = UserService();
 
-  MyVerify({Key? key, required this.verificationId, required this.phoneNumber}) : super(key: key);
+  MyVerify({Key? key, required this.verificationId, required this.phoneNumber})
+      : super(key: key);
 
   @override
   State<MyVerify> createState() => _MyVerifyState();
@@ -104,7 +105,8 @@ class _MyVerifyState extends State<MyVerify> {
       if (userData.isNotEmpty) {
         // User data found, navigate to home screen
         // Navigator.pushReplacementNamed(context, '/home');
-        Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (route) => false);
       } else {
         // User data not found, navigate to authorization screen
         Navigator.pushReplacement(
@@ -147,16 +149,17 @@ class _MyVerifyState extends State<MyVerify> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context)?.verificationError ?? 'Verification Error'),
-            content: Text(AppLocalizations.of(context)?.inavlidVerificationCode ??
-                'Invalid verification code. Please try again.'),
+            title: Text(AppLocalizations.of(context)?.verificationError ??
+                'Verification Error'),
+            content: Text(
+                AppLocalizations.of(context)?.inavlidVerificationCode ??
+                    'Invalid verification code. Please try again.'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(
-                    AppLocalizations.of(context)?.ok ?? 'OK'),
+                child: Text(AppLocalizations.of(context)?.ok ?? 'OK'),
               ),
             ],
           );
@@ -165,14 +168,13 @@ class _MyVerifyState extends State<MyVerify> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     AppLocalizations? appLocalizations = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(appLocalizations?.phoneVerification ?? 'Phone Verification'),
+        title:
+            Text(appLocalizations?.phoneVerification ?? 'Phone Verification'),
       ),
       body: Container(
         margin: EdgeInsets.all(25),
@@ -217,7 +219,8 @@ class _MyVerifyState extends State<MyVerify> {
                   onPressed: () {
                     _signInWithPhoneNumber();
                   },
-                  child: Text(appLocalizations?.verifyPhoneNumber ?? "Verify Phone Number"),
+                  child: Text(appLocalizations?.verifyPhoneNumber ??
+                      "Verify Phone Number"),
                 ),
               ),
               SizedBox(height: 20),
@@ -225,7 +228,8 @@ class _MyVerifyState extends State<MyVerify> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(appLocalizations?.editPhoneNumber ?? "Edit Phone Number"),
+                child: Text(
+                    appLocalizations?.editPhoneNumber ?? "Edit Phone Number"),
               ),
             ],
           ),
@@ -261,7 +265,6 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     AppLocalizations? appLocalizations = AppLocalizations.of(context);
@@ -281,7 +284,8 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
             ),
             SizedBox(height: 20),
             Text(
-              appLocalizations?.pleaseProvideYourFirstAndLastName ?? 'Please provide your first name and last name:',
+              appLocalizations?.pleaseProvideYourFirstAndLastName ??
+                  'Please provide your first name and last name:',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 10),

@@ -1,6 +1,6 @@
-import 'package:beda_invest/src/drawers/switch_languages.dart';
-import 'package:beda_invest/src/home/home.dart';
-import 'package:beda_invest/src/settings/settings_controller.dart';
+import 'package:beda_invest/presenter/pages/drawers/switch_languages.dart';
+import 'package:beda_invest/domain/controllers/settings_controller.dart';
+import 'package:beda_invest/presenter/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,20 +27,23 @@ class _SplashPageState extends State<SplashPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       bool? firstTime = prefs.getBool('first_time');
 
-
-      if (firstTime != null && !firstTime) {// Not first time
+      if (firstTime != null && !firstTime) {
+        // Not first time
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => HomePage(),
           ),
         );
-      } else {// First time
+      } else {
+        // First time
         prefs.setBool('first_time', false);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => SwitchLanguages(settingsController: widget.settingsController,),
+            builder: (context) => SwitchLanguages(
+              settingsController: widget.settingsController,
+            ),
           ),
         );
       }
