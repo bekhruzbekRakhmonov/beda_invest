@@ -8,29 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:money_formatter/money_formatter.dart';
 
-// Ensure Property class is correctly defined elsewhere
-class Property {
-  final String id;
-  final String title;
-  final String description;
-  final String imageUrl;
-  final double price;
-  final int shares;
-  final int investorsCount;
-  final int sharesLeft;
-
-  Property({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-    required this.price,
-    required this.shares,
-    required this.investorsCount,
-    required this.sharesLeft,
-  });
-}
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -71,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final settingsController = SettingsController(SettingsService());
-    
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -80,7 +57,9 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SwitchLanguages(settingsController: settingsController,),
+                builder: (context) => SwitchLanguages(
+                  settingsController: settingsController,
+                ),
               ),
             );
           },

@@ -1,17 +1,19 @@
-// api_service.dart
-
-import 'dart:convert';
 import 'package:beda_invest/domain/models/property_type.dart';
-import 'package:http/http.dart' as http;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<Property> fetchProperty(String propertyId) async {
-  final response =
-      await http.get(Uri.parse('https://your-api.com/properties/$propertyId'));
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  if (response.statusCode == 200) {
-    print(response.statusCode.toString());
-    return Property.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to load property');
+  try {
+    DocumentSnapshot doc =
+        await firestore.collection('Properties').doc(propertyId).get();
+    if (doc.exists) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return Property.fromJson(data);
+    } else {
+      throw Exception('Property not found');
+    }
+  } catch (e) {
+    throw Exception('Failed to load property: $e');
   }
 }

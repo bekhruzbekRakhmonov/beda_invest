@@ -130,7 +130,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     return Column(
       children: [
         const Text(
-          "Enter authentication phone number\nUse country code (eg: +94712345678)",
+          "Enter authentication phone number\nUse country code (eg: +998991991919)",
           style: const TextStyle(fontSize: 16.0),
         ),
         const SizedBox(
