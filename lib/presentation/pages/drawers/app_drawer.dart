@@ -1,10 +1,10 @@
 import 'package:beda_invest/src/app.dart';
-import 'package:beda_invest/presenter/pages/drawers/switch_languages.dart';
+import 'package:beda_invest/presentation/pages/drawers/switch_languages.dart';
 import 'package:beda_invest/domain/controllers/settings_controller.dart';
 import 'package:beda_invest/data/services/settings_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:beda_invest/presenter/pages/login/phone.dart'; // Import your phone.dart file
+import 'package:beda_invest/presentation/pages/login/phone.dart'; // Import your phone.dart file
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import your generated localizations
 
 class AppDrawer extends StatelessWidget {
