@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Property {
   final String id;
   final String imageUrl;
@@ -21,14 +23,28 @@ class Property {
 
   factory Property.fromJson(Map<String, dynamic> json) {
     return Property(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      imageUrl: json['imageUrl'],
-      price: json['price'],
-      shares: json['shares'],
-      investorsCount: json['investorsCount'],
-      sharesLeft: json['sharesLeft']
+        id: json['id'],
+        title: json['title'],
+        description: json['description'],
+        imageUrl: json['imageUrl'],
+        price: json['price'],
+        shares: json['shares'],
+        investorsCount: json['investorsCount'],
+        sharesLeft: json['sharesLeft']);
+  }
+
+  // New fromFirestore factory constructor
+  factory Property.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data()!;
+    return Property(
+      id: doc.id,
+      title: data['title'],
+      description: data['description'],
+      imageUrl: data['imageUrl'],
+      price: data['price'],
+      shares: data['shares'],
+      investorsCount: data['investorsCount'],
+      sharesLeft: data['sharesLeft'],
     );
   }
 }
