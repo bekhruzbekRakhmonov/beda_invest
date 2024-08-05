@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WalletPage extends StatelessWidget {
   const WalletPage({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class WalletPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildCircularButton(Icons.refresh, 'Invest', Colors.black),
+        _buildCircularButton(Icons.repeat, 'Invest', Colors.black),
         _buildCircularButton(Icons.add, 'Deposit', Colors.black),
         _buildCircularButton(Icons.arrow_upward, 'Withdraw', Colors.white),
         _buildCircularButton(Icons.settings, 'Settings', Colors.white),
@@ -100,16 +101,24 @@ class WalletPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
-                Image.network('https://via.placeholder.com/30x30',
-                    width: 30, height: 30),
-                const SizedBox(width: 8),
-                Image.network('https://via.placeholder.com/30x30',
-                    width: 30, height: 30),
-                const SizedBox(width: 8),
-                Image.network('https://via.placeholder.com/30x30',
-                    width: 30, height: 30),
+                FaIcon(
+                  FontAwesomeIcons.bank,
+                  size: 30.0,
+                ),
+                SizedBox(
+                  width: 15.0,
+                ),
+                FaIcon(
+                  FontAwesomeIcons.ccVisa,
+                  size: 30.0,
+                ),
+                SizedBox(width: 15.0,),
+                FaIcon(
+                  FontAwesomeIcons.ccMastercard,
+                  size: 30.0,
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -130,7 +139,7 @@ class WalletPage extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text('Add payment method',
-                  style: TextStyle(color: Colors.white)),
+                  style: TextStyle(color: Colors.white, fontSize: 16.0)),
             ),
           ],
         ),
