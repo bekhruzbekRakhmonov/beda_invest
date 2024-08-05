@@ -9,9 +9,9 @@ class SplashPage extends StatefulWidget {
   final SettingsController settingsController;
 
   const SplashPage({
-    Key? key,
+    super.key,
     required this.settingsController,
-  }) : super(key: key);
+  });
 
   @override
   _SplashPageState createState() => _SplashPageState();
