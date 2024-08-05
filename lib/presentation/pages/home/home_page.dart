@@ -2,6 +2,7 @@ import 'package:beda_invest/presentation/pages/drawers/app_drawer.dart';
 import 'package:beda_invest/presentation/pages/details/property_detail.dart';
 import 'package:beda_invest/domain/models/property_type.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:money_formatter/money_formatter.dart';
 
@@ -13,6 +14,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late Future<List<Property>> futureProperties;
+
+  @override
+  void initState() {
+    super.initState();
+    futureProperties = _fetchProperties();
+  }
+
+  Future<List<Property>> _fetchProperties() async {
+    // Firestore'dan "properties" kolleksiyasini olish
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection('Properties').get();
+
+    // Ma'lumotlarni `Property` obyektlariga aylantirish
+    return querySnapshot.docs
+        .map((doc) => Property(
+            id: doc.id,
+            title: doc['title'],
+            description: doc['description'],
+            imageUrl: doc['imageUrl'],
+            price: doc['price'],
+            shares: doc['shares'],
+            investorsCount: doc['investorsCount'],
+            sharesLeft: doc['sharesLeft']))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,17 +51,24 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       drawer: AppDrawer(isLoggedIn: true),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: properties.length,
+      body: FutureBuilder<List<Property>>(
+        future: futureProperties,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No properties found.'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                return PropertyCard(property: properties[index]);
+                return PropertyCard(property: snapshot.data![index]);
               },
-            ),
-          ),
-        ],
+            );
+          }
+        },
       ),
     );
   }
@@ -82,6 +117,8 @@ class PropertyCard extends StatelessWidget {
               SizedBox(height: 16.0),
               Text(
                 property.title,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -90,6 +127,8 @@ class PropertyCard extends StatelessWidget {
               SizedBox(height: 8.0),
               Text(
                 property.description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 16.0,
                   color: Colors.grey[700],
@@ -129,7 +168,7 @@ class PropertyCard extends StatelessWidget {
                         ),
                         SizedBox(height: 4.0),
                         Text(
-                          '${property.shares}',
+                          '${property.price}',
                           style: const TextStyle(
                             fontSize: 18.0,
                             color: Colors.black,
@@ -190,30 +229,3 @@ class PropertyCard extends StatelessWidget {
     );
   }
 }
-
-final List<Property> properties = [
-  Property(
-    id: '1',
-    imageUrl:
-        'https://frankfurt.apollo.olxcdn.com/v1/files/n8rqrpr6lr0g3-UZ/image;s=1000x700',
-    title: 'Dala hovli Yunusobod tumanida',
-    description:
-        'A beautiful house located in the heart of Yunusobod district.',
-    price: 1000000,
-    shares: 10000,
-    investorsCount: 40,
-    sharesLeft: 800,
-  ),
-  Property(
-    id: '2',
-    imageUrl:
-        'https://frankfurt.apollo.olxcdn.com/v1/files/t5b1y93v5ew1-UZ/image;s=1000x700',
-    title: 'Dala hovli Chorvokda',
-    description: 'A modern apartment located in Charvak.',
-    price: 2000000,
-    shares: 200,
-    investorsCount: 40,
-    sharesLeft: 160,
-  ),
-  // Add more properties here
-];

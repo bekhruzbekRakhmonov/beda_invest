@@ -9,6 +9,7 @@ Future<Property> fetchProperty(String propertyId) async {
       await http.get(Uri.parse('https://your-api.com/properties/$propertyId'));
 
   if (response.statusCode == 200) {
+    print(response.statusCode.toString());
     return Property.fromJson(json.decode(response.body));
   } else {
     throw Exception('Failed to load property');
