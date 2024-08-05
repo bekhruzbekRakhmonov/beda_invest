@@ -1,6 +1,6 @@
-import 'package:beda_invest/presenter/pages/drawers/switch_languages.dart';
+import 'package:beda_invest/presentation/pages/drawers/switch_languages.dart';
 import 'package:beda_invest/domain/controllers/settings_controller.dart';
-import 'package:beda_invest/presenter/pages/home/home_page.dart';
+import 'package:beda_invest/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,9 +9,9 @@ class SplashPage extends StatefulWidget {
   final SettingsController settingsController;
 
   const SplashPage({
-    Key? key,
+    super.key,
     required this.settingsController,
-  }) : super(key: key);
+  });
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // Simulating some loading time
-    Future.delayed(Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       // Navigate to the HomePage when loading is finished
       SharedPreferences prefs = await SharedPreferences.getInstance();
       bool? firstTime = prefs.getBool('first_time');
@@ -58,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
         children: [
           // Background image
           Image.asset(
-            'assets/images/splash_image.png',
+            'assets/splash_image.png',
             fit: BoxFit.cover,
           ),
 
@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 // Replace this with your custom logo widget
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 LoadingAnimationWidget.staggeredDotsWave(
                   color: Colors.black,
                   size: 80,

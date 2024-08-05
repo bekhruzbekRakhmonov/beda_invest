@@ -4,7 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 
 class LocalAppLocalizations {
-  static final LocalAppLocalizations _singleton = LocalAppLocalizations._internal();
+  static final LocalAppLocalizations _singleton =
+      LocalAppLocalizations._internal();
 
   static LocalAppLocalizations get instance => _singleton;
 
@@ -13,8 +14,8 @@ class LocalAppLocalizations {
   LocalAppLocalizations._internal();
 
   Future<void> load(Locale locale) async {
-    final String jsonString =
-        await rootBundle.loadString('lib/src/localization/${locale.languageCode}.arb');
+    final String jsonString = await rootBundle.loadString(
+        'lib/data/services/localization/${locale.languageCode}.arb');
     final Map<String, dynamic> jsonMap = json.decode(jsonString);
     _localizedStrings =
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
@@ -28,7 +29,8 @@ class LocalAppLocalizations {
       _LocalAppLocalizationsDelegate();
 }
 
-class _LocalAppLocalizationsDelegate extends LocalizationsDelegate<LocalAppLocalizations> {
+class _LocalAppLocalizationsDelegate
+    extends LocalizationsDelegate<LocalAppLocalizations> {
   const _LocalAppLocalizationsDelegate();
 
   @override
