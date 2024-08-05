@@ -58,11 +58,11 @@ class ProfilePage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[200],
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.black,
+                    minimumSize: const Size(double.infinity, 50),
                   ),
-                  child: const Text('Add bank account', style: TextStyle(fontSize: 16.0),),
+                  child: const Text('Add bank account',
+                      style: TextStyle(color: Colors.white, fontSize: 16.0)),
                 ),
               ),
             ],
