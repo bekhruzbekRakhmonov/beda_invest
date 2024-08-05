@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:money_formatter/money_formatter.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -68,7 +70,7 @@ class PropertyCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
                 child: CachedNetworkImage(
                   imageUrl: property.imageUrl,
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
                   errorWidget: (context, url, error) => Icon(Icons.error),
@@ -80,7 +82,7 @@ class PropertyCard extends StatelessWidget {
               SizedBox(height: 16.0),
               Text(
                 property.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -99,7 +101,7 @@ class PropertyCard extends StatelessWidget {
                     MoneyFormatter(amount: property.price.toDouble())
                         .output
                         .withoutFractionDigits,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 22,
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
@@ -118,7 +120,7 @@ class PropertyCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Total Shares:',
                           style: TextStyle(
                             fontSize: 16.0,
@@ -128,7 +130,7 @@ class PropertyCard extends StatelessWidget {
                         SizedBox(height: 4.0),
                         Text(
                           '${property.shares}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -139,7 +141,7 @@ class PropertyCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Shares Left:',
                           style: TextStyle(
                             fontSize: 16.0,
@@ -149,7 +151,7 @@ class PropertyCard extends StatelessWidget {
                         SizedBox(height: 4.0),
                         Text(
                           '${property.sharesLeft}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
@@ -160,7 +162,7 @@ class PropertyCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Investors:',
                           style: TextStyle(
                             fontSize: 16.0,
@@ -170,7 +172,7 @@ class PropertyCard extends StatelessWidget {
                         SizedBox(height: 4.0),
                         Text(
                           '${property.investorsCount}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
