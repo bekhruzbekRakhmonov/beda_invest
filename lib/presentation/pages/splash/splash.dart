@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // Simulating some loading time
-    Future.delayed(Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       // Navigate to the HomePage when loading is finished
       SharedPreferences prefs = await SharedPreferences.getInstance();
       bool? firstTime = prefs.getBool('first_time');
@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 // Replace this with your custom logo widget
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 LoadingAnimationWidget.staggeredDotsWave(
                   color: Colors.black,
                   size: 80,
