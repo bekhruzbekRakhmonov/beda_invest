@@ -1,5 +1,5 @@
-import 'package:beda_invest/presenter/pages/drawers/app_drawer.dart';
-import 'package:beda_invest/presenter/pages/details/property_detail.dart';
+import 'package:beda_invest/presentation/pages/drawers/app_drawer.dart';
+import 'package:beda_invest/presentation/pages/details/property_detail.dart';
 import 'package:beda_invest/domain/models/property_type.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

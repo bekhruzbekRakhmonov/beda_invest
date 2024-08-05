@@ -1,6 +1,6 @@
-import 'package:beda_invest/presenter/pages/drawers/switch_languages.dart';
+import 'package:beda_invest/presentation/pages/drawers/switch_languages.dart';
 import 'package:beda_invest/domain/controllers/settings_controller.dart';
-import 'package:beda_invest/presenter/pages/home/home_page.dart';
+import 'package:beda_invest/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
         children: [
           // Background image
           Image.asset(
-            'assets/images/splash_image.png',
+            'assets/splash_image.png',
             fit: BoxFit.cover,
           ),
 
