@@ -1,4 +1,5 @@
 import 'package:beda_invest/presentation/pages/home/home_page.dart';
+import 'package:beda_invest/presentation/pages/nav_page/nav_page.dart';
 import 'package:beda_invest/src/model_theme.dart';
 
 import 'package:beda_invest/presentation/pages/splash/splash.dart';
@@ -104,7 +105,9 @@ class _MyAppState extends State<MyApp> {
                       return SettingsView(
                           controller: widget.settingsController);
                     default:
-                      return HomePage();
+                      return const DashboardPage(
+                        currentPage: 0,
+                      );
                   }
                 },
               );

@@ -195,7 +195,7 @@ class InvestmentCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text(
+                  child: const Text(
                     '22,916 / 24,600',
                     style: TextStyle(
                       fontSize: 24,

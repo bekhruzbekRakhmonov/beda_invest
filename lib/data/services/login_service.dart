@@ -11,6 +11,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   String _verificationId = '';
 
   Future<void> verifyPhone(String phoneNumber) async {
+    // ignore: prefer_function_declarations_over_variables
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
       await _auth.signInWithCredential(phoneAuthCredential);
