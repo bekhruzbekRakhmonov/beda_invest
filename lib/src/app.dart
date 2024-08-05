@@ -1,7 +1,7 @@
-import 'package:beda_invest/presenter/pages/home/home_page.dart';
+import 'package:beda_invest/presentation/pages/home/home_page.dart';
 import 'package:beda_invest/src/model_theme.dart';
 
-import 'package:beda_invest/presenter/pages/splash/splash.dart';
+import 'package:beda_invest/presentation/pages/splash/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../domain/controllers/settings_controller.dart';
-import '../presenter/pages/settings/settings_view.dart';
+import '../presentation/pages/settings/settings_view.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
