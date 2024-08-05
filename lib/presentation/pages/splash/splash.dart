@@ -1,6 +1,5 @@
 import 'package:beda_invest/presentation/pages/drawers/switch_languages.dart';
 import 'package:beda_invest/domain/controllers/settings_controller.dart';
-import 'package:beda_invest/presentation/pages/home/home_page.dart';
 import 'package:beda_invest/presentation/pages/nav_page/nav_page.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';

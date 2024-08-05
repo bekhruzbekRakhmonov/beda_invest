@@ -26,7 +26,7 @@ class PropertyDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Property Details'),
+        title: const Text('Property Details'),
       ),
       body: FutureBuilder<Property>(
         future: _fetchPropertyDetails(propertyId),
@@ -40,7 +40,7 @@ class PropertyDetailPage extends StatelessWidget {
           } else if (snapshot.hasData) {
             final property = snapshot.data!;
             return SingleChildScrollView(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -58,34 +58,35 @@ class PropertyDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.0),
                       child: CachedNetworkImage(
                         imageUrl: property.imageUrl,
-                        placeholder: (context, url) => Center(
+                        placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                         height: 300,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     elevation: 4,
                     child: Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             property.title,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 8.0),
+                          const SizedBox(height: 8.0),
                           Text(
                             property.description,
                             style: TextStyle(
@@ -97,14 +98,14 @@ class PropertyDetailPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
-                  InvestmentCard(),
-                  SizedBox(height: 46.0),
+                  const SizedBox(height: 16.0),
+                  const InvestmentCard(),
+                  const SizedBox(height: 46.0),
                 ],
               ),
             );
           } else {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           }
         },
       ),
@@ -128,10 +129,10 @@ class FullScreenImagePage extends StatelessWidget {
         child: Center(
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            placeholder: (context, url) => Center(
+            placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(),
             ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
             fit: BoxFit.contain,
           ),
         ),
@@ -151,7 +152,7 @@ class InvestmentCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -173,7 +174,7 @@ class InvestmentCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -189,16 +190,16 @@ class InvestmentCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Shares sold',
               style: Theme.of(context).textTheme.displaySmall,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               children: [
-                Expanded(
-                  child: const Text(
+                const Expanded(
+                  child: Text(
                     '22,916 / 24,600',
                     style: TextStyle(
                       fontSize: 24,
@@ -216,18 +217,18 @@ class InvestmentCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             LinearProgressIndicator(
               value: 22916 / 24600,
               backgroundColor: Colors.blue.withOpacity(0.2),
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Invest now',
                   style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
@@ -235,7 +236,7 @@ class InvestmentCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.blue),
               ),
             ),
@@ -256,7 +257,7 @@ class InvestmentCard extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           value,
           style: TextStyle(
