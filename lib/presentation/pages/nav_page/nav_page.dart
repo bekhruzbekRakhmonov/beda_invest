@@ -54,7 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_balance_wallet), label: 'Wallet'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.bar_chart), label: "Portfolio"),
+              icon: Icon(Icons.pie_chart), label: "Portfolio"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_2), label: "Profile"),
         ],
