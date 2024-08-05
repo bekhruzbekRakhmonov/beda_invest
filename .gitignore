@@ -9,8 +9,6 @@
 .history
 .svn/
 migrate_working_dir/
-.env
-GoogleService-Info.plist
 
 # IntelliJ related
 *.iml
@@ -46,3 +44,5 @@ app.*.map.json
 
 
 lib/firebase_options.dart
+GoogleService-Info.plist
+.env
