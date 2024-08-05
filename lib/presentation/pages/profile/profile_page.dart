@@ -109,6 +109,17 @@ class ProfilePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 16,
+                      ),
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
                     onPressed: () {
                       showModalBottomSheet(
                         context: context,
@@ -116,7 +127,7 @@ class ProfilePage extends StatelessWidget {
                         builder: (context) => LoginBottomSheet(),
                       );
                     },
-                    child: const Text('Login'),
+                    child: const Text('Log In', style: TextStyle(fontSize: 18)),
                   ),
                 ],
               ),
@@ -162,32 +173,55 @@ class _LoginBottomSheetState extends State<LoginBottomSheet> {
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       heightFactor: 0.9,
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Container(
-          color: Colors.white,
-          child: AnimatedContainer(
-            // Use AnimatedContainer for the animation
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-            width: MediaQuery.of(context).size.width, // Always take full width
+      child: Container(
+        color: Colors.white,
+        child: AnimatedContainer(
+          // Use AnimatedContainer for the animation
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          width: MediaQuery.of(context).size.width, // Always take full width
 
-            child: showSignUp ? _buildSignUpForm() : _buildLoginForm(),
-          ),
+          child: showSignUp ? _buildSignUpForm() : _buildLoginForm(),
         ),
       ),
     );
   }
 
   Widget _buildLoginForm() {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    @override
+    void dispose() {
+      emailController.dispose();
+      passwordController.dispose();
+      super.dispose();
+    }
+
+    Future<void> _performFirebaseLogin() async {
+      try {
+        final email = emailController.text;
+        final password = passwordController.text;
+
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        // Login successful, you can navigate or perform other actions here
+      } on FirebaseAuthException catch (e) {
+        print('Error: $e');
+        // Handle Firebase authentication errors and display appropriate messages
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.email, color: Colors.grey),
@@ -210,6 +244,7 @@ class _LoginBottomSheetState extends State<LoginBottomSheet> {
           const SizedBox(height: 16),
           TextField(
             obscureText: true,
+            controller: passwordController,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.password, color: Colors.grey),
               border: OutlineInputBorder(
@@ -239,7 +274,7 @@ class _LoginBottomSheetState extends State<LoginBottomSheet> {
               ),
             ),
             onPressed: () {
-              // Login logikasi
+              _performFirebaseLogin();
             },
             child: const Text('Log In', style: TextStyle(fontSize: 18)),
           ),
