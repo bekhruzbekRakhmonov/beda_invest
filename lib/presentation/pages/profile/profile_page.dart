@@ -1,13 +1,52 @@
+import 'package:beda_invest/data/services/settings_service.dart';
+import 'package:beda_invest/domain/controllers/settings_controller.dart';
+import 'package:beda_invest/src/app.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late SettingsController settingsController;
+
+  @override
+  void initState() {
+    super.initState();
+    settingsController = SettingsController(SettingsService());
+    _initializeSettings();
+  }
+
+  Future<void> _initializeSettings() async {
+    await settingsController.loadSettings();
+    setState(() {}); // Rebuild the widget after settings are loaded
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Future.delayed(Duration.zero, () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyApp(
+                              settingsController: settingsController,
+                            )),
+                  );
+                });
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
