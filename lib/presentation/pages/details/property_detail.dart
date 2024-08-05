@@ -1,24 +1,25 @@
 import 'package:beda_invest/data/api_calls/api_service.dart';
 import 'package:beda_invest/domain/models/property_type.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class PropertyDetailPage extends StatefulWidget {
+class PropertyDetailPage extends StatelessWidget {
   final String propertyId;
 
-  PropertyDetailPage({required this.propertyId});
+  const PropertyDetailPage({super.key, required this.propertyId});
 
-  @override
-  _PropertyDetailPageState createState() => _PropertyDetailPageState();
-}
+  Future<Property> _fetchPropertyDetails(String propertyId) async {
+    final docSnapshot = await FirebaseFirestore.instance
+        .collection('Properties')
+        .doc(propertyId)
+        .get();
 
-class _PropertyDetailPageState extends State<PropertyDetailPage> {
-  late Future<Property> futureProperty;
-
-  @override
-  void initState() {
-    super.initState();
-    futureProperty = fetchProperty(widget.propertyId);
+    if (docSnapshot.exists) {
+      return Property.fromFirestore(docSnapshot);
+    } else {
+      throw Exception('Property not found');
+    }
   }
 
   @override
@@ -28,12 +29,14 @@ class _PropertyDetailPageState extends State<PropertyDetailPage> {
         title: Text('Property Details'),
       ),
       body: FutureBuilder<Property>(
-        future: futureProperty,
+        future: _fetchPropertyDetails(propertyId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData) {
+            return const Center(child: Text('Property not found.'));
           } else if (snapshot.hasData) {
             final property = snapshot.data!;
             return SingleChildScrollView(
@@ -112,7 +115,7 @@ class _PropertyDetailPageState extends State<PropertyDetailPage> {
 class FullScreenImagePage extends StatelessWidget {
   final String imageUrl;
 
-  FullScreenImagePage({required this.imageUrl});
+  const FullScreenImagePage({required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
