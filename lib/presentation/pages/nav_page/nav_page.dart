@@ -2,6 +2,7 @@ import 'package:beda_invest/presentation/pages/home/home_page.dart';
 import 'package:beda_invest/presentation/pages/portfolio/portfolio_page.dart';
 import 'package:beda_invest/presentation/pages/profile/profile_page.dart';
 import 'package:beda_invest/presentation/pages/share/shares_page.dart';
+import 'package:beda_invest/presentation/pages/wallet/wallet_page.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -20,8 +21,8 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget currentScreen = HomePage();
   final List<Widget> screens = [
     const HomePage(),
+    const WalletPage(),
     const PortfolioPage(),
-    const SharesPage(),
     const ProfilePage()
   ];
 
@@ -49,12 +50,13 @@ class _DashboardPageState extends State<DashboardPage> {
         },
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: "Home"),
+              icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.graphic_eq_sharp), label: "Portfolio"),
-          BottomNavigationBarItem(icon: Icon(Icons.share), label: "Share"),
+              icon: Icon(Icons.account_balance_wallet), label: 'Wallet'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_outlined), label: "Profile"),
+              icon: Icon(Icons.bar_chart), label: "Portfolio"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_2), label: "Profile"),
         ],
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
