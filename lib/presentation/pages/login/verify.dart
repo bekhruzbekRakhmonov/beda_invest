@@ -202,7 +202,6 @@ class _MyVerifyState extends State<MyVerify> {
                 children: [
                   Text(
                     '${appLocalizations?.resendCodeIn ?? 'Resend Code in'} $_start ${appLocalizations?.seconds ?? 'seconds'}',
-                    style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(width: 10),
                   ElevatedButton(
@@ -216,11 +215,21 @@ class _MyVerifyState extends State<MyVerify> {
                 width: double.infinity,
                 height: 45,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   onPressed: () {
                     _signInWithPhoneNumber();
                   },
-                  child: Text(appLocalizations?.verifyPhoneNumber ??
-                      "Verify Phone Number"),
+                  child: Text(
+                    appLocalizations?.verifyPhoneNumber ??
+                        "Verify Phone Number",
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -229,7 +238,8 @@ class _MyVerifyState extends State<MyVerify> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                    appLocalizations?.editPhoneNumber ?? "Edit Phone Number"),
+                    appLocalizations?.editPhoneNumber ?? "Edit Phone Number",
+                    style: TextStyle(fontSize: 16.0)),
               ),
             ],
           ),
@@ -304,6 +314,13 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onPressed: () async {
                 // Proceed with authorization process
                 String firstName = firstNameController.text;
@@ -327,7 +344,10 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                   // Show an error message or handle empty fields
                 }
               },
-              child: Text(appLocalizations?.finish ?? 'Finish'),
+              child: Text(
+                appLocalizations?.finish ?? 'Finish',
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              ),
             ),
           ],
         ),

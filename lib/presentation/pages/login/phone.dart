@@ -235,6 +235,8 @@ class _MyPhoneState extends State<MyPhone> {
                     height: 45,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -245,7 +247,9 @@ class _MyPhoneState extends State<MyPhone> {
                               await _verifyPhoneNumber();
                             },
                       child: Text(
-                          appLocalizations?.sendTheCode ?? "Send the code"),
+                        appLocalizations?.sendTheCode ?? "Send the code",
+                        style: TextStyle(color: Colors.white, fontSize: 16.0),
+                      ),
                     ),
                   )
                 ],
