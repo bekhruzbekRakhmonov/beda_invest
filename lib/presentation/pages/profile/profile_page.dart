@@ -1,6 +1,5 @@
 import 'package:beda_invest/data/services/settings_service.dart';
 import 'package:beda_invest/domain/controllers/settings_controller.dart';
-import 'package:beda_invest/src/app.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
               title: const Text('Account'),
             )
           : null,
-      body: user != null
+      body: user == null
           ? FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
                   .collection('Users')
@@ -254,7 +253,7 @@ class _LoginBottomSheetState extends State<LoginBottomSheet> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.black,
               minimumSize: const Size(double.infinity, 50),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
@@ -356,7 +355,7 @@ class _LoginBottomSheetState extends State<LoginBottomSheet> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.black,
               minimumSize: const Size(double.infinity, 50),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),

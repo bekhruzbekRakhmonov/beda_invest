@@ -5,10 +5,10 @@ class Property {
   final String imageUrl;
   final String title;
   final String description;
-  final int price;
-  final int shares;
-  final int investorsCount;
-  final int sharesLeft;
+  final dynamic price;
+  final dynamic shares;
+  final dynamic investorsCount;
+  final dynamic sharesLeft;
 
   Property({
     required this.id,
